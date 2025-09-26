@@ -1,7 +1,7 @@
 
   # Collectto App Development
 
-  This is a code bundle for Collectto App Development. The original project is available at https://www.figma.com/design/VRMGVuBxCCLxTfFHJgkIhZ/Collectto-App-Development.
+  This is a code bundle for Collectto App Development. The original project was done for figma hackaton. 
 
   ## Running the code
 
