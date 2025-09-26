@@ -23,18 +23,16 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
-    - name: Debug environment
+    - name: Set base path
       run: |
-        echo "Repository: ${{ github.repository }}"
-        echo "Node environment: $NODE_ENV"
-        echo "Working directory: $(pwd)"
-        ls -la
+        REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+        echo "Repository name: $REPO_NAME"
+        echo "VITE_BASE_PATH=/$REPO_NAME/" >> $GITHUB_ENV
       
     - name: Build project
       run: npm run build
       env:
         NODE_ENV: production
-        GITHUB_REPOSITORY: ${{ github.repository }}
         VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
         VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
         
