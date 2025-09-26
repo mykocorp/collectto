@@ -11,8 +11,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./"),
     },
   },
-  // Use environment variable for base path, fallback to root for local development
-  base: process.env.VITE_BASE_PATH || '/',
+  // Set base path for GitHub Pages deployment
+  // Replace 'your-repo-name' with your actual repository name
+  base: process.env.NODE_ENV === 'production' ? '/collectto/' : '/',
   build: {
     outDir: 'dist',
     sourcemap: true,
