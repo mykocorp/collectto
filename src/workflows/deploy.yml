@@ -23,11 +23,27 @@ jobs:
     - name: Install dependencies
       run: npm ci
       
+    - name: Debug environment
+      run: |
+        echo "Repository: ${{ github.repository }}"
+        echo "Node environment: $NODE_ENV"
+        echo "Working directory: $(pwd)"
+        ls -la
+      
     - name: Build project
       run: npm run build
       env:
+        NODE_ENV: production
+        GITHUB_REPOSITORY: ${{ github.repository }}
         VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
         VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        
+    - name: List build output
+      run: |
+        echo "Build directory contents:"
+        ls -la dist/
+        echo "Index.html content:"
+        cat dist/index.html
         
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'
